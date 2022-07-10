@@ -42,7 +42,6 @@ jobs:
           build-args: |
             COCKROACH_VERSION=22.1.2
             NODE_VERSION=16.x
-            INSTALL_HASHI_TOOLS="consul vault"
             GO_VERSION=1.18.3
             CODER_VERSION=4.5.0
           context: ./coder/
