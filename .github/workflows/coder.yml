@@ -33,10 +33,18 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}},value=v4.5.0
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
+          build-args: |
+            COCKROACH_VERSION=22.1.2
+            NODE_VERSION=16.x
+            INSTALL_HASHI_TOOLS="consul vault"
+            GO_VERSION=1.18.3
+            CODER_VERSION=4.5.0
           context: ./coder/
           push: true
           tags: ${{ steps.meta.outputs.tags }}
