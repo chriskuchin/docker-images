@@ -16,7 +16,7 @@ job "code-server" {
       driver = "docker"
 
       config {
-        image = "registry.home.cksuperman.com/code/server:latest"
+        image = "ghcr.io/chriskuchin/docker-images/coder:4.5.0"
         ports = ["ui", "run"]
         entrypoint = [
           "/usr/bin/entrypoint.sh",
