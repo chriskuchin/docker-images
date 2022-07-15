@@ -1,0 +1,3 @@
+[template]
+src = "otel.yml.tmpl"
+dest = "/etc/otel/config.yml"
