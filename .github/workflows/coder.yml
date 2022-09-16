@@ -40,10 +40,10 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           build-args: |
-            COCKROACH_VERSION=22.1.2
+            COCKROACH_VERSION=22.1.7
             NODE_VERSION=16.x
-            GO_VERSION=1.18.3
-            CODER_VERSION=4.5.0
+            GO_VERSION=1.19.1
+            CODER_VERSION=4.7.0
           context: ./coder/
           push: true
           tags: ${{ steps.meta.outputs.tags }}
