@@ -42,7 +42,7 @@ jobs:
           build-args: |
             COCKROACH_VERSION=22.1.7
             NODE_VERSION=16.x
-            GO_VERSION=1.19.1
+            GO_VERSION=1.19.2
             CODER_VERSION=4.7.0
           context: ./coder/
           push: true
