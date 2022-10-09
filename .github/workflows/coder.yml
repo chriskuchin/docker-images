@@ -9,6 +9,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/coder
+  CODE_VERSION: 4.7.1
 
 jobs:
   build-and-push-coder-image:
@@ -34,7 +35,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=semver,pattern={{version}},value=v4.7.0
+            type=semver,pattern={{version}},value=v${{ env.CODE_VERSION }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
@@ -43,7 +44,7 @@ jobs:
             COCKROACH_VERSION=22.1.7
             NODE_VERSION=16.x
             GO_VERSION=1.19.2
-            CODER_VERSION=4.7.0
+            CODER_VERSION=${{ env.CODE_VERSION }}
           context: ./coder/
           push: true
           tags: ${{ steps.meta.outputs.tags }}
