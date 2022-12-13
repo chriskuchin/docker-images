@@ -9,7 +9,7 @@ ARG INSTALL_HASHI_TOOLS="consul vault"
 ENV GOPATH="/home/coder/go"
 ENV VERSION=v14.16.1
 ENV DISTRO=linux-x64
-ENV PATH=/usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin:/usr/local/go/bin:$HOME/.cargo/bin:$PATH
+ENV PATH=/usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin:/usr/local/go/bin:/home/coder/.cargo/bin:$PATH
 
 RUN sudo apt-get update && sudo apt-get install -y wget gcc software-properties-common gnupg apt-transport-https ca-certificates curl gnupg lsb-release && \
     curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
