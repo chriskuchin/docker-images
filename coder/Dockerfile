@@ -30,4 +30,5 @@ RUN sudo apt-get update && sudo apt-get install -y wget gcc software-properties-
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
     sudo apt-get update && sudo apt-get install -y docker-ce docker-ce-cli containerd.io && \
-    sudo usermod -aG docker `whoami`
+    sudo usermod -aG docker `whoami` && \
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
