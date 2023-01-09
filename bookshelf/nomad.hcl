@@ -48,7 +48,19 @@ job "bookshelf" {
       service {
         name = "bookshelf"
         port = "http"
-        tags = []
+        tags = [
+          "traefik.enable=true",
+          "traefik.http.routers.bookshelf_http.entrypoints=http",
+          "traefik.http.routers.bookshelf_http.rule=Host(`bookshelf.home.cksuperman.com`)",
+          "traefik.http.routers.bookshelf_http.middlewares=bookshelf-redirect@consulcatalog",
+          "traefik.http.middlewares.bookshelf-redirect.redirectscheme.scheme=https",
+          "traefik.http.middlewares.bookshelf-redirect.redirectscheme.permanent=true",
+          "traefik.http.routers.bookshelf.entrypoints=https",
+          "traefik.http.routers.bookshelf.rule=Host(`bookshelf.home.cksuperman.com`)",
+          "traefik.http.routers.bookshelf.tls.certresolver=cloudflare",
+          "traefik.http.routers.bookshelf.tls.domains[0].main=bookshelf.home.cksuperman.com",
+          "wayfinder.domain=bookshelf.home.cksuperman.com",
+        ]
       }
 
       resources {
