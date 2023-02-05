@@ -15,7 +15,7 @@ RUN sudo apt-get update && sudo apt-get install -y wget gcc software-properties-
     curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
     sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" && \
     sudo apt-get update && sudo apt-get install -y ${INSTALL_HASHI_TOOLS} && \
-    wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz && \
+    wget https://golang.google.cn/dl/go${GO_VERSION}.linux-amd64.tar.gz && \
     sudo tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz && \
     rm -f go${GO_VERSION}.linux-amd64.tar.gz && \
     /usr/local/go/bin/go install github.com/go-delve/delve/cmd/dlv@latest && \
