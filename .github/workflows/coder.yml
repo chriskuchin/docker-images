@@ -9,7 +9,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/coder
-  CODE_VERSION: 4.9.1
+  CODE_VERSION: 4.11.0
 
 jobs:
   build-and-push-coder-image:
@@ -41,9 +41,9 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           build-args: |
-            COCKROACH_VERSION=22.1.7
-            NODE_VERSION=16.x
-            GO_VERSION=1.19.5
+            COCKROACH_VERSION=22.2.7
+            NODE_VERSION=18.x
+            GO_VERSION=1.20.3
             CODER_VERSION=${{ env.CODE_VERSION }}
           context: ./coder/
           push: true
