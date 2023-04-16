@@ -11,7 +11,7 @@ ENV VERSION=v18.15.0
 ENV DISTRO=linux-x64
 ENV PATH=/usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin:/usr/local/go/bin:/home/coder/.cargo/bin:$PATH
 
-RUN sudo apt-get update && sudo apt-get install -y wget gpg coreutils gcc software-properties-common apt-transport-https ca-certificates curl lsb-release && \
+RUN sudo apt-get update && sudo apt-get install -y wget gpg coreutils gcc software-properties-common apt-transport-https ca-certificates curl lsb-release
 RUN wget -O- https://apt.releases.hashicorp.com/gpg | sudo gnugpg --dearmor -o /keyrings/hashicorp-archive-keyring.gpg
 RUN echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 RUN sudo apt-get update && sudo apt-get install -y ${INSTALL_HASHI_TOOLS}
