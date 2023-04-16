@@ -14,21 +14,25 @@ ENV PATH=/usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin:/usr/local/go/bin:/home
 RUN sudo apt-get update && sudo apt-get install -y wget gpg coreutils gcc software-properties-common apt-transport-https ca-certificates curl lsb-release && \
     wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /keyrings/hashicorp-archive-keyring.gpg && \
     echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list && \
-    sudo apt-get update && sudo apt-get install -y ${INSTALL_HASHI_TOOLS} && \
-    wget https://golang.google.cn/dl/go${GO_VERSION}.linux-amd64.tar.gz && \
+    sudo apt-get update && sudo apt-get install -y ${INSTALL_HASHI_TOOLS}
+
+RUN wget https://golang.google.cn/dl/go${GO_VERSION}.linux-amd64.tar.gz && \
     sudo tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz && \
-    rm -f go${GO_VERSION}.linux-amd64.tar.gz && \
-    /usr/local/go/bin/go install github.com/go-delve/delve/cmd/dlv@latest && \
+    rm -f go${GO_VERSION}.linux-amd64.tar.gz
+
+RUN /usr/local/go/bin/go install github.com/go-delve/delve/cmd/dlv@latest && \
     /usr/local/go/bin/go install github.com/amacneil/dbmate@latest && \
     /usr/local/go/bin/go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest && \
     /home/coder/go/bin/xcaddy build && \
-    sudo mv caddy /usr/local/bin/ && \
-    wget -qO- https://binaries.cockroachdb.com/cockroach-v${COCKROACH_VERSION}.linux-amd64.tgz | tar -xz && sudo cp -i cockroach-v${COCKROACH_VERSION}.linux-amd64/cockroach /usr/local/bin/ && \
+    sudo mv caddy /usr/local/bin/
+
+RUN wget -qO- https://binaries.cockroachdb.com/cockroach-v${COCKROACH_VERSION}.linux-amd64.tgz | tar -xz && sudo cp -i cockroach-v${COCKROACH_VERSION}.linux-amd64/cockroach /usr/local/bin/ && \
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add - && \
     echo "deb https://deb.nodesource.com/node_${NODE_VERSION} $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/nodesource.list && \
     sudo apt-get update && sudo apt-get install -y nodejs && \
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
     sudo apt-get update && sudo apt-get install -y docker-ce docker-ce-cli containerd.io && \
-    sudo usermod -aG docker `whoami` && \
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
+    sudo usermod -aG docker `whoami`
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
