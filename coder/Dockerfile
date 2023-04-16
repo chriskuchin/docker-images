@@ -11,9 +11,9 @@ ENV VERSION=v18.15.0
 ENV DISTRO=linux-x64
 ENV PATH=/usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin:/usr/local/go/bin:/home/coder/.cargo/bin:$PATH
 
-RUN sudo apt-get update && sudo apt-get install -y wget gcc software-properties-common gnupg apt-transport-https ca-certificates curl gnupg lsb-release && \
-    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
-    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" && \
+RUN sudo apt-get update && sudo apt-get install -y wget gpg coreutils gcc software-properties-common gnupg apt-transport-https ca-certificates curl lsb-release && \
+    wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /keyrings/hashicorp-archive-keyring.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list && \
     sudo apt-get update && sudo apt-get install -y ${INSTALL_HASHI_TOOLS} && \
     wget https://golang.google.cn/dl/go${GO_VERSION}.linux-amd64.tar.gz && \
     sudo tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz && \

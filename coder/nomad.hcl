@@ -82,7 +82,7 @@ job "code-server" {
 
       resources {
         cpu    = 100 # MHz
-        memory = 2048 # MB
+        memory = 3072 # MB
       }
     }
   }
