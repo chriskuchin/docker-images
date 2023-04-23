@@ -35,4 +35,6 @@ RUN wget -qO- https://binaries.cockroachdb.com/cockroach-v${COCKROACH_VERSION}.l
     sudo apt-get update && sudo apt-get install -y docker-ce docker-ce-cli containerd.io && \
     sudo usermod -aG docker `whoami`
 
+RUN curl -L https://nixos.org/nix/install | sh
+
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
