@@ -15,7 +15,7 @@ job "bookshelf" {
 
       config {
         image = "ghcr.io/chriskuchin/bookshelf-rs:main"
-        ports =["http"]
+        ports = ["http"]
 
         entrypoint = []
         volumes = [
@@ -25,12 +25,12 @@ job "bookshelf" {
       }
 
       vault {
-        policies = ["cloudflare-r2"]
+        policies    = ["cloudflare-r2"]
         change_mode = "restart"
       }
 
       template {
-        data = <<-EOH
+        data        = <<-EOH
         {{with secret "kv/cloudflare/r2/bookshelf" }}
         BOOKSHELF_DB_URL=sqlite:///data/bookshelf.db
         BOOKSHELF_STORAGE_URL={{.Data.data.bucket}}
@@ -42,7 +42,7 @@ job "bookshelf" {
         BOOKSHELF_PORT={{ env "NOMAD_PORT_http" }}
         EOH
         destination = "secrets/r2.env"
-        env = true
+        env         = true
       }
 
       service {
@@ -64,7 +64,7 @@ job "bookshelf" {
       }
 
       resources {
-        cpu = 100
+        cpu    = 100
         memory = 256
       }
     }
