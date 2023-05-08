@@ -14,7 +14,7 @@ job "bookshelf" {
       driver = "docker"
 
       config {
-        image = "altescy/bookshelf:latest"
+        image = "ghcr.io/chriskuchin/bookshelf-rs:main"
         ports =["http"]
 
         entrypoint = []
@@ -32,8 +32,8 @@ job "bookshelf" {
       template {
         data = <<-EOH
         {{with secret "kv/cloudflare/r2/bookshelf" }}
-        BOOKSHELF_DB_URL=sqlite3:///data/bookshelf.db
-        BOOKSHELF_STORAGE_URL=s3://{{.Data.data.bucket}}
+        BOOKSHELF_DB_URL=sqlite:///data/bookshelf.db
+        BOOKSHELF_STORAGE_URL={{.Data.data.bucket}}
         BOOKSHELF_AWS_ACCESS_KEY_ID={{.Data.data.access_key}}
         BOOKSHELF_AWS_SECRET_ACCESS_KEY={{.Data.data.secret_key}}
         BOOKSHELF_AWS_S3_REGION=auto
