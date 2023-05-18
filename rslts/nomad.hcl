@@ -7,7 +7,9 @@ job "rslts" {
     count = 1
 
     network {
-      port "http" {}
+      port "http" {
+        to = 3030
+      }
     }
 
     task "rslts" {
