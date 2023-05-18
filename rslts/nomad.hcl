@@ -42,7 +42,7 @@ job "rslts" {
       }
 
       service {
-        name = "bookshelf"
+        name = "rslts"
         port = "http"
         tags = [
           "traefik.enable=true",
