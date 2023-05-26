@@ -18,13 +18,9 @@ RUN sudo apt-get update && sudo apt-get install -y wget gpg coreutils gcc softwa
 
 RUN wget https://golang.google.cn/dl/go${GO_VERSION}.linux-amd64.tar.gz && \
     sudo tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz && \
-    rm -f go${GO_VERSION}.linux-amd64.tar.gz
-
-RUN /usr/local/go/bin/go install github.com/go-delve/delve/cmd/dlv@latest && \
-    /usr/local/go/bin/go install github.com/amacneil/dbmate@latest && \
-    /usr/local/go/bin/go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest && \
-    /home/coder/go/bin/xcaddy build && \
-    sudo mv caddy /usr/local/bin/
+    rm -f go${GO_VERSION}.linux-amd64.tar.gz && \
+    /usr/local/go/bin/go install github.com/go-delve/delve/cmd/dlv@latest && \
+    /usr/local/go/bin/go install github.com/amacneil/dbmate@latest
 
 RUN wget -qO- https://binaries.cockroachdb.com/cockroach-v${COCKROACH_VERSION}.linux-amd64.tgz | tar -xz && sudo cp -i cockroach-v${COCKROACH_VERSION}.linux-amd64/cockroach /usr/local/bin/ && \
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add - && \
