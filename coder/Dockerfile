@@ -4,7 +4,7 @@ FROM codercom/code-server:${CODER_VERSION}
 ARG GO_VERSION=1.20.3
 ARG COCKROACH_VERSION=22.2.7
 ARG NODE_VERSION=18.x
-ARG INSTALL_HASHI_TOOLS="consul vault"
+ARG INSTALL_HASHI_TOOLS="consul vault nomad"
 
 ENV GOPATH="/home/coder/go"
 ENV VERSION=v18.15.0
@@ -32,5 +32,7 @@ RUN wget -qO- https://binaries.cockroachdb.com/cockroach-v${COCKROACH_VERSION}.l
     sudo usermod -aG docker `whoami`
 
 RUN curl -L https://nixos.org/nix/install | sh
+
+RUN curl -L https://fly.io/install.sh | sh
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
