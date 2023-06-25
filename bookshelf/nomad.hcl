@@ -16,6 +16,7 @@ job "bookshelf" {
       config {
         image = "ghcr.io/chriskuchin/bookshelf-rs:main"
         ports = ["http"]
+        force_pull = true
 
         entrypoint = []
         volumes = [
