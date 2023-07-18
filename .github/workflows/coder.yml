@@ -41,9 +41,6 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           build-args: |
-            COCKROACH_VERSION=22.2.7
-            NODE_VERSION=18.x
-            GO_VERSION=1.20.4
             CODER_VERSION=${{ env.CODE_VERSION }}
           context: ./coder/
           push: true
