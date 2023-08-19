@@ -28,6 +28,7 @@ job "code-server" {
         volumes = [
           "/etc/localtime:/etc/localtime:ro",
           "/var/lib/code-server:/home/coder",
+          "var/lib/nix-coder:/nix",
         ]
       }
 
